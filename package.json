@@ -1,0 +1,27 @@
+{
+  "name": "nutsathaporn-astro",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "npm run validate:data && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "tsx --test tests/*.test.ts tests/*.test.mjs",
+    "validate:data": "node scripts/validate-data.mjs"
+  },
+  "dependencies": {
+    "astro": "7.3.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@types/node": "26.6.4",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

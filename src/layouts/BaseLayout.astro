@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+import ProfileHeader from '../components/ProfileHeader.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Home | Nut Sathaporn',
+  description = 'NutSTP | Personal blog | บันทึก แชร์ เรื่องราว บทความต่างๆ',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="Nut Sathaporn" />
+    <link rel="icon" type="image/png" href="/icon-48x48.png" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="cover" aria-hidden="true"></div>
+    <header class="main-header">
+      <ProfileHeader />
+    </header>
+    <main id="main-content" class="main-bg">
+      <slot />
+    </main>
+  </body>
+</html>

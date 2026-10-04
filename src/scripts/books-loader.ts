@@ -1,11 +1,9 @@
+import { parseBookPageCount } from '../lib/book-config';
+
 interface BookRecord {
   imgPath: string;
   title: string;
   finishedDate: string;
-}
-
-interface BookConfig {
-  bookData: number;
 }
 
 function requiredElement<T extends Element>(selector: string): T {
@@ -149,14 +147,8 @@ async function initialize(): Promise<void> {
     const response = await fetch('/api-static/config.json');
     if (!response.ok) throw new Error(`Book config returned ${response.status}`);
 
-    const config = (await response.json()) as BookConfig;
-    nextPage = config.bookData;
-
-    if (!Number.isInteger(nextPage) || nextPage < 1) {
-      setFinished();
-      return;
-    }
-
+    const config = (await response.json()) as unknown;
+    nextPage = parseBookPageCount(config);
     configLoaded = true;
   } catch (error) {
     console.error(error);

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
+import { parseBookPageCount } from '../src/lib/book-config.ts';
 import { bookPageSequence, formatBookDate, sortBooksNewestFirst, type Book } from '../src/lib/books.ts';
 
 const books: Book[] = [
@@ -21,6 +22,15 @@ test('bookPageSequence loads numbered pages from newest to oldest', () => {
   assert.deepEqual(bookPageSequence(4), [4, 3, 2, 1]);
   assert.deepEqual(bookPageSequence(0), []);
   assert.deepEqual(bookPageSequence(2.5), []);
+});
+
+test('parseBookPageCount rejects malformed or empty config instead of ending the collection', () => {
+  assert.equal(parseBookPageCount({ bookData: 7 }), 7);
+  assert.throws(() => parseBookPageCount({ bookData: 0 }), /positive integer/);
+  assert.throws(() => parseBookPageCount({ bookData: 2.5 }), /positive integer/);
+  assert.throws(() => parseBookPageCount({ bookData: '7' }), /positive integer/);
+  assert.throws(() => parseBookPageCount({}), /positive integer/);
+  assert.throws(() => parseBookPageCount(null), /positive integer/);
 });
 
 test('formatBookDate is stable across host time zones', () => {

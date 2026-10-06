@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Books I read | Nut Sathaporn"
+  description="Books read by Sathaporn Wongsanoh, ordered by completion date."
+>
+  <section class="books-page" aria-labelledby="books-title">
+    <div class="books-page-header">
+      <a class="back-link" href="/">← Back</a>
+      <h1 id="books-title">Books I read</h1>
+    </div>
+
+    <div id="book-grid" class="book-grid" aria-live="polite" aria-busy="true"></div>
+
+    <div id="loading-state" class="loading-state" role="status">
+      <span class="loading-dot"></span>
+      <span>Loading books…</span>
+    </div>
+
+    <div id="load-error" class="load-error" hidden>
+      <p>Books could not be loaded. Please try again.</p>
+      <button id="retry-load" type="button">Retry</button>
+    </div>
+
+    <div id="load-more-sentinel" class="load-more-sentinel" aria-hidden="true"></div>
+    <p id="first-journey" class="first-journey" hidden>— you found my first book —</p>
+
+    <noscript>
+      <p class="load-error">JavaScript is required to progressively load the complete reading history.</p>
+    </noscript>
+  </section>
+</BaseLayout>
+
+<script src="../scripts/books-loader.ts"></script>

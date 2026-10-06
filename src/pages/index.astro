@@ -1,0 +1,13 @@
+---
+import BookCarousel from '../components/BookCarousel.astro';
+import WritingList from '../components/WritingList.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { loadSampleBooks, loadWritingLinks } from '../lib/books';
+
+const [books, posts] = await Promise.all([loadSampleBooks(), loadWritingLinks()]);
+---
+
+<BaseLayout>
+  <WritingList posts={posts} />
+  <BookCarousel books={books} />
+</BaseLayout>

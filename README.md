@@ -34,6 +34,15 @@ npm run build
 npm run preview
 ```
 
+## Git Hooks
+
+`npm install` runs Husky's `prepare` script and configures the repository-local hooks:
+
+- `pre-commit` runs `npm test`.
+- `pre-push` runs `npm run check` followed by `npm run build`.
+
+These hooks are local safeguards and can be bypassed with `--no-verify`; they do not provide server-side PR verification.
+
 ## Routes
 
 - `/` — profile, writing links, and latest books
